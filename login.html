@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <title></title>
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/logo_web.ico">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <link rel="icon" href="images/favicon/logo_web.ico" sizes="32x32">
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="#EE6E73">
+    <!-- CSS-->
+    <link href="css/prism.css" rel="stylesheet">
+    <link href="css/ghpages-materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+   <style>
+	.footer {
+	  position: absolute;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1rem;
+	  background-color: #efefef;
+	  text-align: center;
+	}
+	.font1 {
+	color:#C1322E;font-size:3em;
+	}
+	.pad1 {
+	padding-top:50px;
+	}
+   </style>
+  </head>
+  <body>
+    <main> 
+
+     <div class="section no-pad-bot">
+        <div class="container">
+         <div class="preloader-wrapper big active" style="left:45%;  display:none;">
+      		<div class="spinner-layer spinner-blue">
+        		<div class="circle-clipper left">
+          			<div class="circle"></div>
+        	    </div>
+        		<div class="gap-patch">
+          			<div class="circle"></div>
+       		    </div>
+                <div class="circle-clipper right">
+                 <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>  
+
+      <div class="container pad1">
+        <div class="section">
+          <div class="row">
+            <div class="col s12 m8 offset-m2">
+              <br>
+              <img id="responsive-img" src="loading.gif" style="width:50% !important">
+            </div>
+          </div>
+          <!--   Promo Section   -->
+		    <div class="row">
+          <form class="col s12" >
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="icon_prefix" class="username" name="username" type="text" >
+                <label for="icon_prefix">User Name <i class="fa fa-user" aria-hidden="true" ></i></label>
+              </div>
+              <div class="input-field col s6">
+                <input id="icon_https" class="password" name="password" type="password">
+                <label for="icon_https">Password <i class="fa fa-key fa-fw"></i></label>
+              </div>
+            </div>
+            <div class="row">
+              <div id="info"></div>
+              <div id="error"></div>
+            </div>
+            <div id="simpan" class="btn waves-effect waves-light red darken-4">
+    			     <i class="icon-circle-arrow-left icon-large" id="lga"></i> Login
+  			    </div>
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Register</a>
+              <!-- Modal Structure -->
+              <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h5>Pilih Register</h5>
+                  <a  class="btn waves-effect waves-light green darken-4" id="register">Form</a>
+                  <a id="register_sosmed"  class="btn waves-effect waves-light blue darken-4">Sosial media</a>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat"></a>
+                </div>
+              </div>
+             
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>   
+  <footer class="footer">
+    <!-- fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom-->
+      <div class="footer-copyright">
+        <div class="container">
+         © Copyright 2019 Milagros
+      </div>
+      </div>
+    </footer>
+    <div id="modal2" class="modal">
+                <div class="modal-content">
+                  <h5>Aktivkan Sekarang ?</h5>
+                   <select name="aktive_id" id="aktive_id">
+                      <option value="" disabled selected>Choose your option </option>
+                      <option value="YA">YA</option>
+                      <option value="TIDAK">TIDAK</option>
+              </select>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-close waves-effect waves-green btn-flat"></a>
+                </div>
+              </div>
+    <!--  Scripts-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script>if (!window.jQuery) { document.write('<script src="bin/jquery-2.1.1.min.js"><\/script>'); }
+    </script>
+    <script src="js/jquery.timeago.min.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="bin/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/aksesoris.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      /*console.log(localStorage.getItem('password') );
+      if(localStorage.getItem('password') !== null){
+        alert("Anda Belum Logout");
+          window.location.href = "index.html";
+
+      }*/
+     
+  	$('body').on('click','#simpan',function(){
+  		var name     = $(".username").val();
+  		var password = $(".password").val();
+  		var jsonP    = [name,password];
+  		$("i#simpan").html('<i class="fa fa-spinner icon-large" id="lga"></i> Mohon Menunggu ...');
+      $("#info").html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i> Mencari data. Mohon Menunggu .....');  
+          $.ajax({
+  			      type: 'POST',
+              url: getUrl('login/masuk'),
+  			      data: 'getData='+jsonP,
+             // async: true,
+  			      crossDomain: true,
+  			      beforeSend: function(xhr){
+      			     xhr.withCredentials = true;
+  			      },
+              success: function (data) {
+                if(data == 'NOTACTIVE'){
+                     var $toastContent = $('<span>Maaf Data anda Belum di aktivkan</span>');
+                        Materialize.toast($toastContent, 5000);
+                          $('#modal2').openModal();
+                          $('body').on('change','select#aktive_id',function(){
+                           var id = $(this).val();
+                           if(id== 'YA'){
+                               $.ajax({
+                                  type: 'POST',
+                                  url: getUrl('login/aktive_user'),
+                                  data: 'getData='+name,
+                                 // async: true,
+                                  crossDomain: true,
+                                  beforeSend: function(xhr){
+                                     xhr.withCredentials = true;
+                                  },
+                                  success: function (data) {
+                                  }
+                                });
+                           }
+                        }); 
+                        //window.location.href = "aktive.html?"+name;
+                }else if(data == 'KOSONG'){
+                    var $toastContent = $('<span>Maaf User Login Atau password anda salah</span>');
+                        Materialize.toast($toastContent, 5000);
+                }else{
+                   var getContact = eval('(' + data + ')');
+                   var id_edit      = localStorage.setItem('id_edit', getContact.id_edit);
+                   var email        = localStorage.setItem('email', getContact.email);
+                   var fullname     = localStorage.setItem('fullname', getContact.fullname);
+                   var idsosmed     = localStorage.setItem('social_id', getContact.social_id);
+                   var social_media = localStorage.setItem('social_media', getContact.social_media);
+                   var avatar       = localStorage.setItem('avatar', getContact.avatar);
+                   localStorage.setItem('saveObject', JSON.stringify(data));
+                   window.location.href = "edit.html?"+getContact.email;
+                }
+            			//console.log(data);	
+            			/*if(data == 'False2' || data == 'False1'){
+            				var $toastContent = $('<span>Maaf User Login Atau password anda salah</span>');
+              					Materialize.toast($toastContent, 5000);
+            			}
+                   var id_edit      = localStorage.setItem('id_edit', resultOne[i].id_edit);
+                   var email        = localStorage.setItem('email', resultOne[i].email);
+                   var fullname     = localStorage.setItem('fullname', resultOne[i].fullname);
+                   var idsosmed     = localStorage.setItem('social_id', resultOne[i].social_id);
+                   var social_media = localStorage.setItem('social_media', resultOne[i].social_media);
+                   var avatar       = localStorage.setItem('avatar', resultOne[i].avatar);
+                   localStorage.setItem('saveObject', JSON.stringify(data));
+                   if(getContact.result =='Success'){
+              				 localStorage.setItem('saveObject', JSON.stringify(data));
+              				 var retrievedObject = localStorage.getItem('saveObject');
+              				 window.location.href = "index.html";
+            			 }else i{
+            				   alert("Maaf Data tidak ditemukan");
+            			 }*/
+  				 
+              }               
+          });
+  	});
+    $("body").on('click','#register_sosmed', function(){
+  		window.location.href = "register_sosmed.html";
+  	});
+    //----Form Direc
+    $("body").on('click','#register', function(){
+      window.location.href = "register.html";
+    }); 
+ });
+
+
+</script>
+
+  
+
+  </body>
+</html>
